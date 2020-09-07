@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Tanks/Tank.cs" type="Script" id=1]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 20.0278
+height = 0.0
+
+[node name="Tank" type="KinematicBody2D"]
+script = ExtResource( 1 )
+RotationSpeed = 1.0
+GunCoolDown = 0.4
+Health = 10
+
+[node name="Body" type="Sprite" parent="."]
+rotation = -1.5708
+
+[node name="GunTimer" type="Timer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Turret" type="Node2D" parent="."]
+
+[node name="Turret" type="Sprite" parent="Turret"]
+rotation = -1.5708
+
+[node name="Muzzle" type="Position2D" parent="Turret/Turret"]
+position = Vector2( 0, 15 )
+[connection signal="mouse_entered" from="." to="." method="_on_Tank_mouse_entered"]
+[connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]

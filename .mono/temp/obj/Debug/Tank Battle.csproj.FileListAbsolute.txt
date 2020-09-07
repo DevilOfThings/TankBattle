@@ -1,0 +1,6 @@
+D:\GitHub\Godot\TankBattle\.mono\temp\bin\Debug\Tank Battle.dll
+D:\GitHub\Godot\TankBattle\.mono\temp\bin\Debug\Tank Battle.pdb
+D:\GitHub\Godot\TankBattle\.mono\temp\obj\Debug\Tank Battle.csprojAssemblyReference.cache
+D:\GitHub\Godot\TankBattle\.mono\temp\obj\Debug\Tank Battle.csproj.CoreCompileInputs.cache
+D:\GitHub\Godot\TankBattle\.mono\temp\obj\Debug\Tank Battle.dll
+D:\GitHub\Godot\TankBattle\.mono\temp\obj\Debug\Tank Battle.pdb
