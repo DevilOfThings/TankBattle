@@ -15,7 +15,7 @@ collision_mask = 5
 script = ExtResource( 4 )
 Bullet = ExtResource( 5 )
 MaxSpeed = 150
-Health = 100
+MaxHealth = 100
 
 [node name="Body" parent="." index="0"]
 texture = ExtResource( 2 )

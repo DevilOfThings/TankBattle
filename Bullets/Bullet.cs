@@ -39,7 +39,12 @@ public class Bullet : Area2D
   public void _on_Bullet_body_entered(Node body)
   {
       if(body.HasMethod("TakeDamage")) {
-          // Invoke???
+          
+          var type = body.GetType();
+          GD.Print($"{type}");
+          var takeDamage = type.GetMethod("TakeDamage");
+          GD.Print($"{takeDamage}");
+          takeDamage.Invoke(body, new object[] {Damage});
           
       }
       explode();

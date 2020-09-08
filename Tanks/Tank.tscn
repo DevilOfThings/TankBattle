@@ -10,7 +10,6 @@ height = 0.0
 script = ExtResource( 1 )
 RotationSpeed = 1.0
 GunCoolDown = 0.4
-Health = 10
 
 [node name="Body" type="Sprite" parent="."]
 rotation = -1.5708

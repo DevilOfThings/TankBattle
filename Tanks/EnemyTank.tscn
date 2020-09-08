@@ -17,7 +17,7 @@ script = ExtResource( 4 )
 Bullet = ExtResource( 5 )
 MaxSpeed = 50
 RotationSpeed = 10.0
-Health = 5
+MaxHealth = 50
 TurretSpeed = 2
 DetectRadius = 400
 

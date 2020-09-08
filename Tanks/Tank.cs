@@ -21,7 +21,8 @@ public class Tank : KinematicBody2D
     [Export]
     public float GunCoolDown;
     [Export]
-    public int Health;
+    public int MaxHealth;
+    private int health;
 
     protected Vector2 velocity = new Vector2();
     protected bool CanShoot = true;
@@ -33,12 +34,14 @@ public class Tank : KinematicBody2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        health = MaxHealth;
         var gunTimer = (Timer)GetNode("GunTimer");
         GD.Print($"{gunTimer}");
         gunTimer.WaitTime = GunCoolDown;
 
         var map = GetNode<Map01>("/root/Map01");
         var error = this.Connect("Shoot", map, "_on_Tank_Shoot");
+        EmitSignal("HealthChanged", health*100/MaxHealth);
         
         GD.Print($"{Enum.GetName(typeof(Error), error)}");
         
@@ -75,6 +78,20 @@ public class Tank : KinematicBody2D
         MoveAndSlide(velocity);
     }
 
+    public void TakeDamage(int amount)
+    {
+        health-=amount;
+        EmitSignal("HealthChanged", health * 100/MaxHealth);
+
+        if(health <= 0) {
+            Explode();
+        }
+    }
+
+    public void Explode()
+    {
+        QueueFree();
+    }
     public void _on_GunTimer_timeout()
     {
         CanShoot = true;
