@@ -4,3 +4,4 @@
 .mono/
 logs/
 *.import
+.vscode/

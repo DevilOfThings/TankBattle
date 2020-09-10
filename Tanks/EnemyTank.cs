@@ -25,25 +25,21 @@ public class EnemyTank : Tank
     {
         var parent = GetParent() as PathFollow2D;
 
-        var lookAheadL = GetNode<RayCast2D>("LookAheadL");
-        var lookAheadR = GetNode<RayCast2D>("LookAheadR");
+        if(parent != null) {
 
-        if(lookAheadL.IsColliding() || lookAheadR.IsColliding()) {
-            
-            speed = Lerp(speed, 0, 0.3f);
-            
-        }
-        else {
-            speed = Lerp(speed, MaxSpeed, 0.3f);
-        }
+            var lookAheadL = GetNode<RayCast2D>("LookAheadL");
+            var lookAheadR = GetNode<RayCast2D>("LookAheadR");
 
-        
-        if(parent !=null) {
+            if(lookAheadL.IsColliding() || lookAheadR.IsColliding()) {
+                
+                speed = Lerp(speed, 0, 0.3f);
+            }
+            else {
+                speed = Lerp(speed, MaxSpeed, 0.3f);
+            }
+
             parent.Offset = (parent.Offset + speed * delta);
             Position= new Vector2(0,0);
-        }
-        else {
-
         }
     }
 
@@ -76,14 +72,42 @@ public class EnemyTank : Tank
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
   public override void _Process(float delta)
   {
+      var parent = GetParent() as PathFollow2D;
+
       if(target !=null) {
           var targetDir = (target.GlobalPosition - GlobalPosition).Normalized();
           var currentDir = new Vector2(1,0).Rotated(((Node2D)GetNode("Turret")).GlobalRotation);
-          ((Node2D)GetNode("Turret")).GlobalRotation = 
-            currentDir.LinearInterpolate(targetDir, TurretSpeed*delta).Angle();
+          var leftAngle = currentDir.LinearInterpolate(targetDir, TurretSpeed*delta).Angle();
 
-        if(targetDir.Dot(currentDir) >0.9) {
-            shoot();
+          if(parent != null)
+          {
+            ((Node2D)GetNode("Turret")).GlobalRotation = leftAngle;
+          }
+          else if(leftAngle <= 1.1 && leftAngle >= -1.1) {
+            ((Node2D)GetNode("Turret")).GlobalRotation = leftAngle;
+          }
+            
+
+
+        if(targetDir.Dot(currentDir) >0.8) {
+           shoot();
+        }
+        
+        
+        if(parent == null) 
+        {
+            var targetDir2 = (GlobalPosition - target.GlobalPosition).Normalized();
+            var currentDir2 = new Vector2(1,0).Rotated(((Node2D)GetNode("Turret2")).GlobalRotation);
+            var rightAngle = currentDir2.LinearInterpolate(targetDir2, TurretSpeed*delta).Angle();
+            if(rightAngle <= 1.1 && rightAngle >= -1.1)
+                ((Node2D)GetNode("Turret2")).GlobalRotation = rightAngle;
+            
+
+            if(targetDir2.Dot(currentDir2) >0.8) {
+                shoot2();
+            }
+            
+            //GD.Print($"LeftAngle: {leftAngle} RightAngle: {rightAngle}");
         }
       }
   }

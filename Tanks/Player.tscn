@@ -20,7 +20,7 @@ MaxHealth = 100
 [node name="Body" parent="." index="0"]
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
 [node name="Turret" parent="Turret" index="0"]
@@ -30,6 +30,18 @@ offset = Vector2( 0, 25 )
 [node name="Muzzle" parent="Turret/Turret" index="0"]
 position = Vector2( 0.21, 55 )
 
+[node name="Flash" parent="Turret/Turret" index="1"]
+position = Vector2( 0, 55 )
+offset = Vector2( 0, 28 )
+
+[node name="Muzzle" parent="Turret2/Turret" index="0"]
+rotation = 1.5708
+
 [node name="Camera2D" type="Camera2D" parent="." index="4"]
 current = true
 zoom = Vector2( 1.4, 1.4 )
+
+[node name="Explosion" parent="." index="6"]
+position = Vector2( 9.53674e-07, 0 )
+scale = Vector2( 0.405702, 0.410714 )
+frame = 1

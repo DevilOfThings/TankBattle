@@ -11,10 +11,6 @@ public class HUD : CanvasLayer
 
     Tween HealthBarTween;
 
-    public void UpdateHealthBar()
-    {
-
-    }
     public void UpdateHealthBar(int value)
     {
         GD.Print($"{GetTree().Root}");
@@ -46,9 +42,8 @@ public class HUD : CanvasLayer
          GetNode<AnimationPlayer>("AnimationPlayer").Play("healthBarFlash");
         }
         //GetNode<TextureProgress>("Margin/Container/HealthBar").Value = value;
-
-
     }
+    
     // Declare member variables here. Examples:
     // private int a = 2;
     // private string b = "text";

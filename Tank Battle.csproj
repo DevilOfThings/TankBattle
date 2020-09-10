@@ -65,6 +65,7 @@
     <Compile Include="Tanks\Player.cs" />
     <Compile Include="Tanks\Tank.cs" />
     <Compile Include="UI\HUD.cs" />
+    <Compile Include="UI\UnitDisplay.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

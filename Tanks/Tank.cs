@@ -26,6 +26,7 @@ public class Tank : KinematicBody2D
 
     protected Vector2 velocity = new Vector2();
     protected bool CanShoot = true;
+    protected bool CanShoot2 = true;
     protected bool Alive = true;
 
 
@@ -41,6 +42,7 @@ public class Tank : KinematicBody2D
 
         var map = GetNode<Map01>("/root/Map01");
         var error = this.Connect("Shoot", map, "_on_Tank_Shoot");
+        
         EmitSignal("HealthChanged", health*100/MaxHealth);
         
         GD.Print($"{Enum.GetName(typeof(Error), error)}");
@@ -56,17 +58,39 @@ public class Tank : KinematicBody2D
     {
         if(CanShoot) 
         {
-            
+            GD.Print($"Can shoot");
             CanShoot = false;
             GetNode<Timer>("GunTimer").Start();
             var turret = GetNode<Node2D>("Turret");
             var dir = new Vector2(1,0).Rotated(turret.GlobalRotation);
             var muzzle = GetNode<Position2D>("Turret/Turret/Muzzle");
+            GetNode<AnimationPlayer>("AnimationPlayer").Play("muzzle_flash");
 
             GD.Print($"Shoot {turret.GlobalRotation}");
             EmitSignal("Shoot", Bullet, muzzle.GlobalPosition, dir);
         }
     }
+
+    protected void shoot2()
+    {
+        if(CanShoot2)         
+        {
+            
+            if(FindNode("Turret2") != null)
+            {
+                CanShoot2 = false;
+                GetNode<Timer>("GunTimer").Start();
+                var turret = GetNode<Node2D>("Turret2/Turret/Muzzle");
+                var dir = new Vector2(1,0).Rotated(turret.GlobalRotation);
+                var muzzle = GetNode<Position2D>("Turret2/Turret/Muzzle");
+                GetNode<AnimationPlayer>("AnimationPlayer").Play("muzzle_flash2");
+
+                GD.Print($"Shoot {turret.GlobalRotation}");
+                EmitSignal("Shoot", Bullet, muzzle.GlobalPosition, dir);
+            }
+        }
+    }
+
     public override void _PhysicsProcess(float delta)
     {
         if (!Alive) {
@@ -90,12 +114,25 @@ public class Tank : KinematicBody2D
 
     public void Explode()
     {
-        QueueFree();
+        GetNode<CollisionShape2D>("CollisionShape2D").Disabled = true;
+        Alive = false;
+        GetNode<Node2D>("Turret").Hide();
+        GetNode<Sprite>("Body").Hide();
+        GetNode<AnimatedSprite>("Explosion").Show();
+        GetNode<AnimatedSprite>("Explosion").Play("fire");
+
     }
     public void _on_GunTimer_timeout()
     {
         CanShoot = true;
+        CanShoot2 = true; // not correct
     }
+
+    public void _on_Explosion_animation_finished()
+    {
+        QueueFree();
+    }
+
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)
 //  {

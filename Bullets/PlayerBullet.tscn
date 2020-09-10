@@ -6,16 +6,16 @@
 
 [node name="PlayerBullet" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-Speed = 750
-Lifetime = 0.5
 
-[node name="Sprite" parent="." index="0"]
+[node name="Explosion" parent="." index="0"]
+frame = 3
+
+[node name="Sprite" parent="." index="1"]
 position = Vector2( 0, 0 )
 rotation = 1.5708
 scale = Vector2( 1.50782, 2.28571 )
 texture = ExtResource( 3 )
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" parent="." index="2"]
 visible = false
 position = Vector2( 0, 2.27374e-13 )
-scale = Vector2( 1, 1 )

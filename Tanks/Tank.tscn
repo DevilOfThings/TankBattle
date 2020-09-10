@@ -1,10 +1,68 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Tanks/Tank.cs" type="Script" id=1]
+[ext_resource path="res://Explosions/Explosion.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/PNG/Retina/shotOrange.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 20.0278
 height = 0.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "init"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Turret/Turret/Flash:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "muzzle_flash"
+length = 0.15
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Turret/Turret/Flash:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.11, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Turret/Turret/Flash:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.03, 0.08, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Turret/Turret:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.03, 0.08, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
 
 [node name="Tank" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -13,8 +71,6 @@ GunCoolDown = 0.4
 
 [node name="Body" type="Sprite" parent="."]
 rotation = -1.5708
-
-[node name="GunTimer" type="Timer" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -27,5 +83,39 @@ rotation = -1.5708
 
 [node name="Muzzle" type="Position2D" parent="Turret/Turret"]
 position = Vector2( 0, 15 )
+rotation = 1.5708
+
+[node name="Flash" type="Sprite" parent="Turret/Turret"]
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 3 )
+
+[node name="Turret2" type="Node2D" parent="."]
+
+[node name="Turret" type="Sprite" parent="Turret2"]
+rotation = 1.5708
+
+[node name="Muzzle" type="Position2D" parent="Turret2/Turret"]
+position = Vector2( 0, 15 )
+rotation = 3.14159
+
+[node name="Flash" type="Sprite" parent="Turret2/Turret"]
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 3 )
+
+[node name="GunTimer" type="Timer" parent="."]
+
+[node name="Explosion" parent="." instance=ExtResource( 2 )]
+visible = false
+scale = Vector2( 0.25, 0.25 )
+frame = 3
+playing = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "init"
+anims/init = SubResource( 2 )
+anims/muzzle_flash = SubResource( 3 )
 [connection signal="mouse_entered" from="." to="." method="_on_Tank_mouse_entered"]
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
+[connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]

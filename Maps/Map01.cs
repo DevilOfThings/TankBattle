@@ -10,7 +10,7 @@ public class Map01 : Node2D
     public override void _Ready()
     {
         SetCameraLimits();
-
+        Input.SetCustomMouseCursor(ResourceLoader.Load("res://Assets/UI/crossair_white.png"), Input.CursorShape.Arrow, new Vector2(16,16));
        
         
     }
@@ -37,24 +37,17 @@ public class Map01 : Node2D
 //  }
     
 
-    public void _on_Tank_Shoot(Node body)
-    {
-        GD.Print($"_on_Tank_Shoot{body}");
-    }
-
+   
     public void _on_Tank_Shoot(PackedScene bullet, Vector2 position, Vector2 direction) {
     
         GD.Print($"_on_Tank_Shoot {position} {direction}");
+       
+        var instance = bullet.Instance() as Bullet;
+        GD.Print($"{instance.GetType()}");
+        AddChild(instance);
+        instance.Start(position, direction);
 
-        //var bulletScene = ResourceLoader.Load("res://Bullets/PlayerBullet.tscn") as PackedScene;
-
-        //if(bulletScene !=null) {
-            var instance = bullet.Instance() as Bullet;
-            GD.Print($"{instance.GetType()}");
-            AddChild(instance);
-            instance.Start(position, direction);
-        //}
-
-        
     }
+
+    
 }
