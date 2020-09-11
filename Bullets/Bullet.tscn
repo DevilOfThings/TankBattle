@@ -8,6 +8,7 @@ extents = Vector2( 16, 32 )
 
 [node name="Bullet" type="Area2D"]
 scale = Vector2( 0.5, 0.5 )
+
 script = ExtResource( 2 )
 Speed = 750
 Damage = 5

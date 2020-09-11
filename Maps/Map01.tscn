@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Assets/PNG/Retina/tileGrass2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/PNG/Retina/tileSand1.png" type="Texture" id=2]
@@ -48,6 +48,7 @@
 [ext_resource path="res://Tanks/EnemyTank.tscn" type="PackedScene" id=46]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=47]
 [ext_resource path="res://Tanks/EnemyDualMachineGun.tscn" type="PackedScene" id=48]
+[ext_resource path="res://environment/Obstacle.tscn" type="PackedScene" id=49]
 
 [sub_resource type="TileSet" id=1]
 0/name = "tracksSmall.png 0"
@@ -703,5 +704,135 @@ DetectRadius = 250
 [node name="HUD" parent="." instance=ExtResource( 47 )]
 
 [node name="EnemyTank" parent="." instance=ExtResource( 48 )]
-position = Vector2( 1492.88, -170.614 )
+position = Vector2( 1480.88, -94.614 )
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Barriers" type="Node" parent="Obstacles"]
+
+[node name="Obstacle2" parent="Obstacles/Barriers" instance=ExtResource( 49 )]
+position = Vector2( 572.049, -250.316 )
+rotation = 1.2913
+collision_mask = 4
+
+[node name="Obstacle3" parent="Obstacles/Barriers" instance=ExtResource( 49 )]
+position = Vector2( 518.309, -181.726 )
+rotation = 0.322305
+scale = Vector2( 1, 1 )
+
+[node name="Obstacle4" parent="Obstacles/Barriers" instance=ExtResource( 49 )]
+position = Vector2( 518.309, 574.274 )
+rotation = 0.252759
+scale = Vector2( 1, 1 )
+
+[node name="Obstacle5" parent="Obstacles/Barriers" instance=ExtResource( 49 )]
+position = Vector2( 574.309, 636.274 )
+rotation = 0.252759
+scale = Vector2( 1, 1 )
+
+[node name="Obstacle6" parent="Obstacles/Barriers" instance=ExtResource( 49 )]
+visible = false
+position = Vector2( 1374.29, 41.6627 )
+rotation = 2.05686
+scale = Vector2( 1, 1 )
+collision_layer = 2147483649
+
+[node name="Obstacle7" parent="Obstacles/Barriers" instance=ExtResource( 49 )]
+visible = false
+position = Vector2( 1584.97, 36.3278 )
+rotation = 0.823425
+collision_mask = 4
+
+[node name="Obstacle8" parent="Obstacles/Barriers" instance=ExtResource( 49 )]
+position = Vector2( 3596.31, 58.2736 )
+rotation = 0.252759
+scale = Vector2( 1, 1 )
+
+[node name="Obstacle9" parent="Obstacles/Barriers" instance=ExtResource( 49 )]
+position = Vector2( 3514.31, 180.274 )
+rotation = 1.58712
+
+[node name="Trees" type="Node" parent="Obstacles"]
+
+[node name="Obstacle10" parent="Obstacles/Trees" instance=ExtResource( 49 )]
+position = Vector2( 2878.31, -61.7265 )
+rotation = 1.85946
+type = 16
+
+[node name="Obstacle11" parent="Obstacles/Trees" instance=ExtResource( 49 )]
+position = Vector2( 2882.31, -207.726 )
+rotation = 1.85946
+type = 16
+
+[node name="Obstacle12" parent="Obstacles/Trees" instance=ExtResource( 49 )]
+position = Vector2( 3044.31, -61.7264 )
+rotation = 1.85946
+type = 16
+
+[node name="Obstacle13" parent="Obstacles/Trees" instance=ExtResource( 49 )]
+position = Vector2( 3220.31, -195.726 )
+rotation = 1.85946
+type = 16
+
+[node name="Obstacle14" parent="Obstacles/Trees" instance=ExtResource( 49 )]
+position = Vector2( 3218.31, -51.7264 )
+rotation = 1.85946
+type = 16
+
+[node name="Obstacle15" parent="Obstacles/Trees" instance=ExtResource( 49 )]
+position = Vector2( 3376.31, -187.726 )
+rotation = 1.85946
+type = 16
+
+[node name="Obstacle16" parent="Obstacles/Trees" instance=ExtResource( 49 )]
+position = Vector2( 3058.31, -195.726 )
+rotation = 1.85946
+type = 16
+
+[node name="SandBags" type="Node" parent="Obstacles"]
+
+[node name="Obstacle17" parent="Obstacles/SandBags" instance=ExtResource( 49 )]
+visible = false
+position = Vector2( 1265.23, -97.2929 )
+rotation = -0.0744147
+collision_mask = 0
+type = 13
+
+[node name="Obstacle18" parent="Obstacles/SandBags" instance=ExtResource( 49 )]
+position = Vector2( 1486.82, 22.1753 )
+rotation = 1.5504
+collision_mask = 4
+type = 12
+
+[node name="Obstacle23" parent="Obstacles/SandBags" instance=ExtResource( 49 )]
+position = Vector2( 1422.75, -225.438 )
+rotation = 1.08904
+collision_mask = 4
+type = 12
+
+[node name="Obstacle19" parent="Obstacles/SandBags" instance=ExtResource( 49 )]
+visible = false
+position = Vector2( 1677.03, -65.2567 )
+rotation = 0.00799657
+collision_mask = 4
+type = 14
+
+[node name="Obstacle20" parent="Obstacles/SandBags" instance=ExtResource( 49 )]
+position = Vector2( 1497.5, -224.103 )
+rotation = 1.85946
+collision_mask = 4
+type = 14
+
+[node name="Obstacle21" parent="Obstacles/SandBags" instance=ExtResource( 49 )]
+visible = false
+position = Vector2( 1678.37, -174.714 )
+rotation = 2.77762
+collision_mask = 4
+type = 14
+
+[node name="Obstacle22" parent="Obstacles/SandBags" instance=ExtResource( 49 )]
+position = Vector2( 1458.12, -250.132 )
+rotation = 1.52364
+collision_mask = 4
+type = 14
 [connection signal="HealthChanged" from="Ground/Player" to="HUD" method="UpdateHealthBar"]

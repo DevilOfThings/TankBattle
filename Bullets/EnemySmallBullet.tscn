@@ -3,6 +3,7 @@
 [ext_resource path="res://Bullets/EnemyBullet.tscn" type="PackedScene" id=1]
 
 [node name="EnemySmallBullet" instance=ExtResource( 1 )]
+Lifetime = 1.0
 
 [node name="Sprite" parent="." index="1"]
 scale = Vector2( 1, 2 )

@@ -85,8 +85,8 @@ public class Tank : KinematicBody2D
                 var muzzle = GetNode<Position2D>("Turret2/Turret/Muzzle");
                 GetNode<AnimationPlayer>("AnimationPlayer").Play("muzzle_flash2");
 
-                GD.Print($"Shoot {turret.GlobalRotation}");
-                EmitSignal("Shoot", Bullet, muzzle.GlobalPosition, dir);
+                //GD.Print($"Shoot {turret.GlobalRotation}");
+                //EmitSignal("Shoot", Bullet, muzzle.GlobalPosition, dir);
             }
         }
     }
