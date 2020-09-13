@@ -9,14 +9,18 @@ public class Bullet : Area2D
     public int Damage;
     [Export]
     public float Lifetime;
+    [Export] float SteerForce;
+
+    Node2D target = null;
 
     Vector2 velocity = new Vector2();
+    Vector2 Acceleration = new Vector2();
 
-    public void Start(Vector2 position, Vector2 direction)
+    public void Start(Vector2 position, Vector2 direction, Node2D target=null)
     {
         Position = position;
         Rotation = direction.Angle();
-        
+        this.target = target;
         var root = this.GetTree().Root;
 
         GD.Print($"Lifetime: {Lifetime}");
@@ -32,10 +36,26 @@ public class Bullet : Area2D
         
     }
 
+    private Vector2 seek()
+    {
+        var desired = (target.Position - Position).Normalized() * Speed;
+        var steer = (desired-velocity).Normalized() * SteerForce;
+        return steer;
+    }
+
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
   public override void _Process(float delta)
   {
+    //   if(target!=null)
+    //   {
+    //       //GD.Print($"Homing: {target}");
+    //       Acceleration += seek();
+    //       velocity += Acceleration * delta;
+    //       velocity = velocity.Clamped(Speed);
+    //         Rotation = velocity.Angle();
+    //   }
       Position += velocity * delta;
+
   }
 
   public void _on_Bullet_body_entered(Node body)

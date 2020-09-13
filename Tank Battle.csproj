@@ -60,12 +60,15 @@
     <Compile Include="Bullets\Bullet.cs" />
     <Compile Include="Bullets\PlayerBullet.cs" />
     <Compile Include="Maps\Map01.cs" />
+    <Compile Include="Objects\Pickup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tanks\EnemyTank.cs" />
     <Compile Include="Tanks\Player.cs" />
     <Compile Include="Tanks\Tank.cs" />
     <Compile Include="UI\HUD.cs" />
+    <Compile Include="UI\TitleScreen.cs" />
     <Compile Include="UI\UnitDisplay.cs" />
+    <Compile Include="GLOBALS.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

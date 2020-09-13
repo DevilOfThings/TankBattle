@@ -90,7 +90,7 @@ public class EnemyTank : Tank
 
 
         if(targetDir.Dot(currentDir) >0.8) {
-           shoot();
+           shoot(GunShots, GunSpread, target);
         }
         
         

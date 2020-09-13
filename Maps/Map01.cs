@@ -12,7 +12,12 @@ public class Map01 : Node2D
         SetCameraLimits();
         Input.SetCustomMouseCursor(ResourceLoader.Load("res://Assets/UI/crossair_white.png"), Input.CursorShape.Arrow, new Vector2(16,16));
        
+        var parent = GetParent();
         
+        var tileMap = GetNode<TileMap>("Ground");
+        var player = GetNode<Player>("Ground/Player");        
+        GD.Print($"{tileMap.Name} {player.Name}");
+        player.Map = tileMap;
     }
 
     
@@ -38,16 +43,20 @@ public class Map01 : Node2D
     
 
    
-    public void _on_Tank_Shoot(PackedScene bullet, Vector2 position, Vector2 direction) {
+    public void _on_Tank_Shoot(PackedScene bullet, Vector2 position, Vector2 direction, Node2D tank) {
     
         GD.Print($"_on_Tank_Shoot {position} {direction}");
        
         var instance = bullet.Instance() as Bullet;
         GD.Print($"{instance.GetType()}");
         AddChild(instance);
-        instance.Start(position, direction);
+        instance.Start(position, direction, tank);
 
     }
 
-    
+    public void _on_Player_Dead()
+    {
+        GD.Print("Player Dead!!!!");
+        GetTree().ChangeScene(GLOBALS.Levels[0]);
+    }
 }

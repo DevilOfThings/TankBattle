@@ -6,13 +6,13 @@
 [ext_resource path="res://Assets/PNG/Retina/shotThin.png" type="Texture" id=4]
 [ext_resource path="res://Assets/PNG/Retina/specialBarrel3.png" type="Texture" id=5]
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 65.7964, 58.9472 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=2]
 loop = true
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Turret2/Turret/Flash:modulate")
 tracks/0/interp = 1
@@ -71,7 +71,11 @@ scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
-shape = SubResource( 5 )
+shape = SubResource( 1 )
+
+[node name="Smoke" parent="." index="2"]
+position = Vector2( -70, 0 )
+scale = Vector2( 2, 2 )
 
 [node name="Turret" parent="Turret" index="0"]
 position = Vector2( 30, 0 )
@@ -87,7 +91,7 @@ position = Vector2( 0, 80.002 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 
-[node name="Turret2" parent="." index="3"]
+[node name="Turret2" parent="." index="4"]
 position = Vector2( -50, 0 )
 scale = Vector2( 2, 2 )
 
@@ -107,17 +111,17 @@ texture = ExtResource( 4 )
 offset = Vector2( 0, 10 )
 flip_h = true
 
-[node name="LookAheadR" parent="." index="5"]
+[node name="LookAheadR" parent="." index="7"]
 visible = false
 
-[node name="LookAheadL" parent="." index="6"]
+[node name="LookAheadL" parent="." index="8"]
 visible = false
 
-[node name="UnitDisplay" parent="." index="7"]
+[node name="UnitDisplay" parent="." index="9"]
 position = Vector2( -0.872009, 8.5 )
 
-[node name="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" parent="." index="11"]
 autoplay = ""
-anims/2ndTurrent = SubResource( 6 )
-anims/int2 = SubResource( 7 )
+anims/2ndTurrent = SubResource( 2 )
+anims/int2 = SubResource( 3 )
 anims/muzzle_flash2 = SubResource( 4 )

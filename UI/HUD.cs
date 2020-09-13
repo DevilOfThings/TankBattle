@@ -11,6 +11,10 @@ public class HUD : CanvasLayer
 
     Tween HealthBarTween;
 
+    public void UpdateAmmo(int value)
+    {
+        GetNode<TextureProgress>("Margin/Container/Ammo").Value = value;
+    }
     public void UpdateHealthBar(int value)
     {
         GD.Print($"{GetTree().Root}");

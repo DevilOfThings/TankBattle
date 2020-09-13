@@ -38,7 +38,7 @@ rotation = 0.0
 position = Vector2( 0, 55 )
 offset = Vector2( 0, 28 )
 
-[node name="DetectRadius" type="Area2D" parent="." index="4"]
+[node name="DetectRadius" type="Area2D" parent="." index="5"]
 visible = false
 collision_layer = 4
 collision_mask = 2
@@ -46,25 +46,30 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRadius" index="0"]
 shape = SubResource( 1 )
 
-[node name="LookAheadR" type="RayCast2D" parent="." index="5"]
+[node name="LookAheadR" type="RayCast2D" parent="." index="6"]
 position = Vector2( 0, 25 )
 enabled = true
 cast_to = Vector2( 150, 0 )
 collision_mask = 7
 
-[node name="LookAheadL" type="RayCast2D" parent="." index="6"]
+[node name="LookAheadL" type="RayCast2D" parent="." index="7"]
 position = Vector2( 0, -25 )
 enabled = true
 cast_to = Vector2( 150, 0 )
 collision_mask = 7
 
-[node name="UnitDisplay" parent="." index="7" instance=ExtResource( 6 )]
+[node name="UnitDisplay" parent="." index="8" instance=ExtResource( 6 )]
 position = Vector2( 0.127991, 27.5 )
 
 [node name="Explosion" parent="." index="9"]
 position = Vector2( 0.749994, -3.8147e-06 )
 scale = Vector2( 1.07199, 0.997863 )
 frame = 1
+
+[node name="Smoke" parent="." index="11"]
+position = Vector2( -50, 0 )
+rotation = -3.14159
+scale = Vector2( 1, 1 )
 [connection signal="HealthChanged" from="." to="UnitDisplay" method="UpdateHealthBar"]
 [connection signal="body_entered" from="DetectRadius" to="." method="_on_DetectRadius_body_entered"]
 [connection signal="body_exited" from="DetectRadius" to="." method="_on_DetectRadius_body_exited"]

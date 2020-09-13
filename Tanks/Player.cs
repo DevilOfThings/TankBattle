@@ -25,7 +25,7 @@ public class Player : Tank
             velocity = new Vector2(-MaxSpeed/2, 0).Rotated(Rotation);
         }
         if(Input.IsActionPressed("click")) {
-            shoot();
+            shoot(1,1);
         }
     }
 
@@ -35,6 +35,15 @@ public class Player : Tank
         base._Ready();
     }
 
+    public void Heal(int amount)
+    {
+        health += amount;
+        
+        health = Math.Min(health, MaxHealth);
+        EmitSignal("HealthChanged", health * 100/MaxHealth);        
+    }
+
+    
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)
 //  {
